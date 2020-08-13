@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shuffle and Sort</title>
+    <style>
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        background-color: #ffffff;
+      }
+
+      .grid {
+        align-items: center;
+      }
+
+      .cell {
+        height: 40px;
+        margin-bottom: 5px;
+        text-align: center;
+        line-height: 40px;
+        background-color: #efefef;
+      }
+
+      .cell-bg1 {
+        border-left: 8px solid #6f98a8;
+      }
+
+      .cell-bg2 {
+        border-left: 8px solid #2b8ead;
+      }
+
+      .cell-bg3 {
+        border-left: 8px solid #2f454e;
+      }
+
+      .cell-bg4 {
+        border-left: 8px solid #999;
+      }
+
+      .action {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: baseline;
+      }
+
+      .action button {
+        background-color: #72c3dc;
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 10px;
+        box-shadow: 0 3px 4px #2b8ead;
+        border: none;
+        cursor: pointer;
+        width: 140px;
+        height: 57px;
+      }
+
+      .action button:focus {
+        outline: none;
+      }
+
+      @media only screen and (min-width: 600px) {
+        .wrapper {
+          flex-direction: row-reverse;
+          background-color: #efefef;
+        }
+
+        .grid {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: 80%;
+        }
+
+        .cell {
+          flex: 1 1 33.3%;
+          height: 180px;
+          background-color: #999;
+          margin-bottom: 0;
+          font-size: 30px;
+          font-weight: bold;
+          color: white;
+          line-height: 170px;
+        }
+
+        .action {
+          width: 20%;
+        }
+
+        .cell-bg1 {
+          border: none;
+          background-color: #6f98a8;
+        }
+
+        .cell-bg2 {
+          border: none;
+          background-color: #2b8ead;
+        }
+
+        .cell-bg3 {
+          border: none;
+          background-color: #2f454e;
+        }
+
+        .cell-bg4 {
+          border: none;
+          background-color: #999;
+        }
+      }
+
+      .task-description {
+        text-align: center;
+        font-style: italic;
+        font-size: 16px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body onload="fillData()">
+    <div class="wrapper">
+      <div class="action">
+        <button onclick="shuffle()">SHUFFLE</button>
+        <button onclick="sort()">SORT</button>
+      </div>
+      <div class="grid">
+        loading
+      </div>
+    </div>
+    <div class="task-description">Shuffle and Sort by Sandeep Bohra</div>
+    <script>
+      let counters = [
+        { count: 1, cls: "cell-bg1" },
+        { count: 2, cls: "cell-bg2" },
+        { count: 3, cls: "cell-bg3" },
+        { count: 4, cls: "cell-bg2" },
+        { count: 5, cls: "cell-bg3" },
+        { count: 6, cls: "cell-bg4" },
+        { count: 7, cls: "cell-bg4" },
+        { count: 8, cls: "cell-bg1" },
+        { count: 9, cls: "cell-bg3" },
+      ];
+
+      const gridNode = document.querySelector(".grid");
+
+      const fillData = () => {
+        let gridContent = "";
+        counters.forEach((counter) => {
+          gridContent += `<div class="cell ${counter.cls}">${counter.count}</div>`;
+        });
+        gridNode.innerHTML = gridContent;
+      };
+
+      const shuffle = () => {
+        counters.sort(() => Math.random() - 0.5);
+        fillData();
+      };
+
+      const sort = () => {
+        counters.sort((a, b) => a.count - b.count);
+        fillData();
+      };
+    </script>
+  </body>
+</html>
